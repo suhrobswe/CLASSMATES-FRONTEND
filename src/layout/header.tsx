@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import Cookies from "js-cookie";
 import { User } from "lucide-react";
-
 export const Header = () => {
     const role = Cookies.get("role");
 
@@ -11,7 +10,7 @@ export const Header = () => {
 
             <nav className="flex space-x-6">
                 <NavLink
-                    to={role === "admin" ? "/admin" : "/"}
+                    to={role === "admin" ? "/admin" : "/student"}
                     className={({ isActive }) =>
                         `hover:text-blue-500 transition-colors duration-200 ${
                             isActive
@@ -24,7 +23,11 @@ export const Header = () => {
                 </NavLink>
 
                 <NavLink
-                    to={role === "admin" ? "/admin/classmates" : "/classmates"}
+                    to={
+                        role === "admin"
+                            ? "/admin/classmates"
+                            : "/student/classmates"
+                    }
                     className={({ isActive }) =>
                         `hover:text-blue-500 transition-colors duration-200 ${
                             isActive
@@ -38,16 +41,7 @@ export const Header = () => {
             </nav>
 
             <div className="flex gap-3">
-                <NavLink
-                    to="/profile"
-                    className={({ isActive }) =>
-                        `flex items-center justify-center w-10 h-10 rounded-full border transition-colors duration-200 ${
-                            isActive
-                                ? "border-blue-500 text-blue-500"
-                                : "border-white text-white hover:border-blue-500 hover:text-blue-500"
-                        }`
-                    }
-                >
+                <NavLink to="/profile">
                     <User size={20} />
                 </NavLink>
             </div>

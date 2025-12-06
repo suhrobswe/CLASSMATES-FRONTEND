@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@import "keen-slider/keen-slider.min.css";
+
 @custom-variant dark (&:is(.dark *));
 
 .container {
@@ -160,10 +162,24 @@ button:focus-visible {
     --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* Bu CSS-ni global uslublar faylingizga (masalan, index.css) qo'shing */
 .masonry-column {
+    /* Bu sinf, Masonry-ga bergan columnClassName propiga mos kelishi kerak */
+    padding-left: 0; /* Ustunlar orasidagi bo'shliqlar uchun chap paddingni nolga o'rnating */
     background-clip: padding-box;
 }
 
+.masonry-column > div {
+    /* ustun ichidagi har bir elementning yuqori paddingi (bo'shlig'i) */
+    /* Bu, Masonry-ga bergan gap-4 ga mos kelishi uchun bo'lishi kerak, shuning uchun 4 bo'shliqni ta'minlaydi */
+    padding-top: 1rem; /* Tailwind-da 'gap-4' uchun 16px (1rem) */
+}
+
+/* Bosh ustun uchun padding (Bu joyda 1rem (16px) bo'shliq yo'q, shuning uchun flex gap bilan ishlaydi) */
+.flex.gap-4 {
+    margin-left: -1rem; /* Masonry-ning ichki gap-4-ni bekor qilish uchun (agar kerak bo'lsa) */
+    width: auto;
+}
 
 .dark {
     --background: oklch(0.145 0 0);

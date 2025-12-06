@@ -1,5 +1,3 @@
-"use client";
-
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -31,7 +29,6 @@ import { Button } from "../../components/ui/button";
 import { Spinner } from "../../components/ui/spinner";
 import { PasswordInput } from "../../components/ui/password-input";
 
-// Zod schema
 const formSchema = z.object({
     username: z.string().min(1, "Username is required."),
     password: z.string().min(1, "Password is required."),
@@ -54,23 +51,17 @@ export const Login = () => {
     const onSubmit = (data: z.infer<typeof formSchema>) => {
         mutate(data, {
             onSuccess: (res) => {
-                const role = res.data.role.toLowerCase();
-                Cookies.set("token", res.data.accessToken);
-                Cookies.set("role", role);
+                Cookies.set("token", res.data.accessToken, { path: "/" });
 
-                toast.success(res.message.en);
+                Cookies.set("role", res.data.role.toLowerCase(), { path: "/" });
 
-                console.log(role)
-                if (role === "admin") {
-                    navigate("/admin");
-                } else {
-                    navigate("/");
-                }
+                Cookies.set("username", data.username);
+
+                toast.success("Login successfully!");
+                navigate(`/${String(res.data.role.toLowerCase())}`);
             },
-
-            onError: () => {
-                toast.error("Username, password or role incorrect");
-            },
+            onError: (_err) =>
+                toast.error("Username, role or password incorrect"),
         });
     };
 
@@ -81,7 +72,6 @@ export const Login = () => {
                     <h1 className="text-4xl font-extrabold text-white tracking-wide">
                         Welcome to the Classmates Website!
                     </h1>
-
                     <p className="text-gray-400 text-sm mt-2">
                         Sign in to continue
                     </p>

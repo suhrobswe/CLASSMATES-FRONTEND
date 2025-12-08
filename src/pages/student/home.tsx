@@ -10,7 +10,6 @@ import {
     type ReactPortal,
 } from "react";
 
-// ✅ TO'G'IRLANGAN PLUGIN: Har safar yangi interval o'rnatishdan oldin eskisini tozalaydi.
 function AutoplayPlugin(slider: any) {
     let interval: number | undefined;
 
@@ -19,7 +18,6 @@ function AutoplayPlugin(slider: any) {
     };
 
     const autoplay = () => {
-        // !!! MUHIM O'ZGARTIRISH: Har safar yangi taymer o'rnatishdan oldin eskisini tozalaymiz.
         clear();
         interval = setInterval(() => {
             slider.next();
@@ -29,13 +27,11 @@ function AutoplayPlugin(slider: any) {
     slider.on("created", autoplay);
     slider.on("destroyed", clear);
     slider.on("dragStarted", clear);
-    slider.on("animationEnded", autoplay); // Animatsiya tugagach, eskisini o'chirib, yangi taymer ishga tushadi
+    slider.on("animationEnded", autoplay);
 }
 
 export const Home = () => {
     const { data: postData, isLoading: postLoading } = usePostList();
-
-    // KeenSlider hook-i
     const [sliderRef] = useKeenSlider<HTMLDivElement>(
         {
             loop: true,
@@ -43,7 +39,7 @@ export const Home = () => {
             drag: true,
             slides: { perView: 1 },
         },
-        [AutoplayPlugin] // O'zgartirilgan pluginni ishlatish
+        [AutoplayPlugin]
     );
 
     const breakpointColumnsObj = { default: 4, 1300: 3, 700: 2, 600: 1 };
@@ -70,7 +66,6 @@ export const Home = () => {
         );
     }
 
-    // Rasmlarni tayyorlash
     const imageCards =
         postData?.flatMap((post: { images: string[]; title: string }) =>
             post.images?.map((img: string) => ({
@@ -81,7 +76,6 @@ export const Home = () => {
 
     return (
         <div className="px-4 py-6 space-y-6">
-            {/* 🎞 Infinite Slider */}
             {imageCards.length > 0 && (
                 <div
                     ref={sliderRef}
@@ -107,7 +101,6 @@ export const Home = () => {
                 </div>
             )}
 
-            {/* 🖼 Masonry Grid */}
             <Masonry
                 breakpointCols={breakpointColumnsObj}
                 className="flex gap-4"

@@ -38,6 +38,19 @@ export const Header = () => {
                 >
                     Classmates
                 </NavLink>
+
+                <NavLink
+                    to={"/videos"}
+                    className={({ isActive }) =>
+                        `hover:text-blue-500 transition-colors duration-200 ${
+                            isActive
+                                ? "text-blue-500 font-semibold"
+                                : "text-white"
+                        }`
+                    }
+                >
+                    Videos
+                </NavLink>
             </nav>
 
             <div className="flex gap-3">

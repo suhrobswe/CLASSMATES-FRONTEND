@@ -54,6 +54,7 @@ export const AdminHome = () => {
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+
     const [title, setTitle] = useState("");
     const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
@@ -177,6 +178,7 @@ export const AdminHome = () => {
                     {isPending ? "Creating..." : "Create a new post"}
                 </Button>
             </div>
+
 
             <Masonry
                 breakpointCols={breakpointColumnsObj}

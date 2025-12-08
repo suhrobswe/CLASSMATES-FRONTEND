@@ -8,6 +8,7 @@ import { AdminHome } from "./pages/admin/home";
 import { AdminClassmates } from "./pages/admin/classmates";
 import { Profile } from "./pages/profile";
 import { NotFoundPage } from "./NotFoundPage";
+import { Videos } from "./pages/videos";
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                 </Route>
 
                 <Route path="profile" element={<Profile />} />
+                <Route path="/videos" element={<Videos />} />
             </Route>
 
             <Route path="*" element={<NotFoundPage />} />

@@ -6,7 +6,6 @@ export const MainLayout = () => {
     const token = Cookies.get("token");
     const role = Cookies.get("role");
 
-
     if (!token || !role) {
         return <Navigate replace to={"/login"} />;
     }

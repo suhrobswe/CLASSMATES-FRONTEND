@@ -22,7 +22,6 @@ export const Profile = () => {
 
     const [username, setUsername] = useState("");
     const [fullName, setFullName] = useState("");
-    const [password, setPassword] = useState("");
     const [file, setFile] = useState<File | null>(null);
     const [preview, setPreview] = useState<string>("");
 
@@ -75,7 +74,7 @@ export const Profile = () => {
         editProfile.mutate(
             { username, fullName, imageUrl },
             {
-                onSuccess: (res) => {
+                onSuccess: () => {
                     toast.success("Profile updated!");
                     client.invalidateQueries({ queryKey: ["user", username] });
                 },

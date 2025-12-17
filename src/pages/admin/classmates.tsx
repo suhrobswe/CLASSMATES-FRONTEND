@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useUserList } from "../service/query/useUserList";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import { useToggle } from "../../hooks/useToggle";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useUpdateActive } from "../service/mutate/useUpdateActive";
@@ -11,7 +10,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
 import { Button } from "../../components/ui/button";
@@ -41,16 +39,11 @@ import { UserTable } from "../../components/table";
 export function AdminClassmates() {
     const { data, isLoading } = useUserList();
     const queryClient = useQueryClient();
-    const navigate = useNavigate();
 
     const { isOpen, open, close } = useToggle();
-    const {
-        isOpen: isOpenEdit,
-        open: openEdit,
-        close: closeEdit,
-    } = useToggle();
+    const { isOpen: isOpenEdit, close: closeEdit } = useToggle();
 
-    const [editId, setEditId] = useState("");
+    const [editId] = useState("");
     const [deleteId, setDeleteId] = useState("");
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
